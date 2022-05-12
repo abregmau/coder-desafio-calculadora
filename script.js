@@ -1,7 +1,7 @@
-//Declaramos variables
-var operandoa = 0;
-var operandob = 0;
-var operacion = "";
+//Se definen variables
+var mem = 0;
+var operando = 0;
+var operador = "";
 
 function init(){
     //variables
@@ -22,6 +22,7 @@ function init(){
     var ocho = document.getElementById('ocho');
     var nueve = document.getElementById('nueve');
     var cero = document.getElementById('cero');
+    var coma = document.getElementById('coma');
 }
 
 //Eventos de click
@@ -55,67 +56,74 @@ nueve.onclick = function(e){
 cero.onclick = function(e){
     resultado.textContent = resultado.textContent  + "0";
 }
+coma.onclick = function(e){
+    if(resultado.textContent.lastIndexOf('.')==-1)
+        resultado.textContent = resultado.textContent  + ".";
+}
 reset.onclick = function(e){
     resetear();
 }
 suma.onclick = function(e){
-    operandob = resultado.textContent;
+    operando = resultado.textContent;
     resolver();
-    operacion = "+";
+    operador = "+";
     limpiar();
 }
 resta.onclick = function(e){
-    operandob = resultado.textContent;
+    operando = resultado.textContent;
     resolver();
-    operacion = "-";
+    operador = "-";
     limpiar();
 }
 multiplicacion.onclick = function(e){
-    operandob = resultado.textContent;
+    operando = resultado.textContent;
     resolver();
-    operacion = "*";
+    operador = "*";
     limpiar();
 }
 division.onclick = function(e){
-    operandob = resultado.textContent;
+    operando = resultado.textContent;
     resolver();
-    operacion = "/";
+    operador = "/";
     limpiar();
 }
 igual.onclick = function(e){
-    operandob = resultado.textContent;
+    operando = resultado.textContent;
     resolver();
-    resultado.textContent = operandoa;
+    resultado.textContent = mem;
+    operador = "";
 }
+
+//Se definen las funciones
 
 function limpiar(){
     resultado.textContent = "";
 }
 function resetear(){
     resultado.textContent = "";
-    operandoa = 0;
-    operandob = 0;
-    operacion = "";
+    mem = 0;
+    operando = 0;
+    operador = "";
 }
 
 function resolver(){
     var res = 0;
-    switch(operacion){
+    switch(operador){
     case "+":
-        res = parseFloat(operandoa) + parseFloat(operandob);
+        res = parseFloat(mem) + parseFloat(operando);
         break;
     case "-":
-        res = parseFloat(operandoa) - parseFloat(operandob);
+        res = parseFloat(mem) - parseFloat(operando);
         break;
     case "*":
-        res = parseFloat(operandoa) * parseFloat(operandob);
+        res = parseFloat(mem) * parseFloat(operando);
         break;
     case "/":
-        res = parseFloat(operandoa) / parseFloat(operandob);
+        res = parseFloat(mem) / parseFloat(operando);
         break;
     case "":
-        res = parseFloat(operandob)
+        res = parseFloat(operando)
         break;
     }
-    operandoa = res;
+    mem = res;
 }
